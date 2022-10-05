@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "django-play"
+version = "0.1.0"
+description = ""
+authors = ["Kamaal <kamaal.f1@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_play"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.1.2"
+djangorestframework = "^3.14.0"
+PyYAML = "^6.0"
+uritemplate = "^4.1.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = {version = "^22.8.0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
