@@ -3,9 +3,18 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    username = serializers.CharField(max_length=150, required=True)
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(max_length=128, required=True)
+
     class Meta:
         model = User
-        fields = ["url", "username", "email", "groups"]
+        fields = ["username", "email", "password"]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.pop("password")
+        return representation
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
