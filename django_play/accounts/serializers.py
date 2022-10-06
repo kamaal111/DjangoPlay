@@ -1,5 +1,7 @@
+from typing import Any, Dict
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -11,10 +13,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ["username", "email", "password"]
 
-    def to_representation(self, instance):
+    def to_representation(self, instance: User):
         representation = super().to_representation(instance)
         representation.pop("password")
         return representation
+
+    def create(self, validated_data: Dict[str, Any]):
+        updated_data = validated_data
+        raw_password: str = updated_data.pop("password")
+        updated_data["password"] = make_password(raw_password)
+        return super().create(updated_data)
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
