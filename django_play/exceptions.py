@@ -1,4 +1,5 @@
 import logging
+from http.client import BAD_REQUEST
 from typing import List, Literal, Optional
 from rest_framework.exceptions import ValidationError, ErrorDetail
 from rest_framework.views import exception_handler
@@ -43,7 +44,8 @@ def handle_validation_error(exception: ValidationError, response: Response):
                 logging.info(f"unknown validation code; {code}")
                 message = f"{value_that_is_invalid} is invalid"
 
-            response.data = {"detail": message}
+            response.data = {"detail": message, "status_code": BAD_REQUEST}
+
             return response
 
     return response
