@@ -1,8 +1,5 @@
-import json
 from django.contrib.auth.models import User, Group
-from rest_framework import mixins, viewsets
-from rest_framework import permissions
-from django.http import HttpResponseBadRequest
+from rest_framework import mixins, viewsets, permissions
 
 
 from django_play.accounts.serializers import UserSerializer, GroupSerializer

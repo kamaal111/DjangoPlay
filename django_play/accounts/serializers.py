@@ -4,8 +4,8 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.CharField(max_length=150, required=True)
-    email = serializers.EmailField(required=True)
-    password = serializers.CharField(max_length=128, required=True)
+    email = serializers.EmailField(min_length=5, required=True)
+    password = serializers.CharField(min_length=4, max_length=128, required=True)
 
     class Meta:
         model = User
