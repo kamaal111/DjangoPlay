@@ -29,7 +29,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return super().create(updated_data)
 
 
-class LoginSerializer(serializers.Serializer):
+class LoginPayloadSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
 
@@ -51,3 +51,10 @@ class LoginSerializer(serializers.Serializer):
             raise Unauthorized()
 
         return user
+
+
+class LoginResponseSerializer(serializers.Serializer):
+    token = serializers.CharField()
+
+    class Meta:
+        fields = ["token"]

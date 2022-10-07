@@ -4,11 +4,13 @@ from rest_framework import mixins, viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework.authtoken.models import Token
-from django.http import Http404
+from drf_spectacular.utils import extend_schema
 
-
-from django_play.accounts.serializers.user import UserSerializer, LoginSerializer
+from django_play.accounts.serializers.user import (
+    LoginResponseSerializer,
+    UserSerializer,
+    LoginPayloadSerializer,
+)
 from django_play.accounts.serializers.group import GroupSerializer
 
 
@@ -23,13 +25,17 @@ class UserViewSet(
     queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
 
+    @extend_schema(
+        request=LoginPayloadSerializer, responses={200: LoginResponseSerializer}
+    )
     @action(detail=False, methods=["POST"], url_path="login")
     def login(self, request: Request):
-        serializer = LoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        token = serializer.get_user_token()
-        return Response({"token": token.key}, status=OK)
+        payload_serializer = LoginPayloadSerializer(data=request.data)
+        payload_serializer.is_valid(raise_exception=True)
+        token = payload_serializer.get_user_token()
+        response_serializer = LoginResponseSerializer(data={"token": token.key})
+        response_serializer.is_valid(raise_exception=True)
+        return Response(response_serializer.data, status=OK)
 
 
 class GroupViewSet(viewsets.ModelViewSet):
