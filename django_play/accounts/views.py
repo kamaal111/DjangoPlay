@@ -19,7 +19,7 @@ class UserViewSet(
     viewsets.GenericViewSet,
 ):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that allows users to be created or authenticate.
     """
 
     queryset = User.objects.all().order_by("-date_joined")

@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     "rest_framework.authtoken",
+    "django_play.accounts",
+    "django_play.blogs",
 ]
 
 MIDDLEWARE = [
