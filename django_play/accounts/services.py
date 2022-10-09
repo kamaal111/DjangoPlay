@@ -8,7 +8,13 @@ from .exceptions import Unauthorized
 
 class AuthenticationService:
     def __init__(self) -> None:
-        pass
+        ...
+
+    def authenticated_token(self, token: str):
+        try:
+            return Token.objects.get(key=token)
+        except Token.DoesNotExist as e:
+            raise Unauthorized from e
 
     def get_user_token(self, username: str, password: str):
         user = self.__get_authorized_user(username=username, password=password)
