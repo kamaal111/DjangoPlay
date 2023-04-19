@@ -1,0 +1,21 @@
+FROM python:3.11
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONFAULTHANDLER=1
+ENV PYTHONHASHSEED=random
+ENV PIP_NO_CACHE_DIR=off
+ENV PIP_DISABLE_PIP_VERSION_CHECK=on
+ENV PIP_DEFAULT_TIMEOUT=100
+ENV POETRY_VERSION=1.2.1
+
+WORKDIR /code
+
+COPY . /code/
+
+RUN python -m venv /code/.venv
+RUN . ./.venv/bin/activate
+RUN pip install "poetry==$POETRY_VERSION"
+RUN poetry install
+
+EXPOSE 8000
+CMD ["sh", "start.sh"]

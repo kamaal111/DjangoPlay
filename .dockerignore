@@ -1,0 +1,8 @@
+__pycache__
+.venv
+.git
+.vscode
+db.sqlite3
+Dockerfile
+.gitignore
+data
