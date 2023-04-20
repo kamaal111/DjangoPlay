@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONFAULTHANDLER=1
@@ -10,12 +10,11 @@ ENV POETRY_VERSION=1.2.1
 
 WORKDIR /code
 
-COPY . /code/
+COPY django_play templates manage.py requirements.txt start.sh /code/
 
 RUN python -m venv /code/.venv
 RUN . ./.venv/bin/activate
-RUN pip install "poetry==$POETRY_VERSION"
-RUN poetry install
+RUN pip install -r requirements.txt
 
-EXPOSE 8000
+EXPOSE ${PORT}
 CMD ["sh", "start.sh"]
