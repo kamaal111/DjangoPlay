@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    container_name: django-play
+    command: sh start.sh
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      PORT: 8000
+      POSTGRES_PORT: 5432
+      POSTGRES_NAME: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+
+  db:
+    container_name: django-play-db
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_HOST_AUTH_METHOD: trust
