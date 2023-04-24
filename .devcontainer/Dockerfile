@@ -1,4 +1,4 @@
-FROM python:3.11-buster
+FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
@@ -9,4 +9,5 @@ ENV PIP_DEFAULT_TIMEOUT 100
 ENV PYTHONUNBUFFERED 1
 
 RUN apt update
-RUN apt install -y zsh
+RUN apt install -y zsh curl git
+RUN chsh -s /bin/zsh
