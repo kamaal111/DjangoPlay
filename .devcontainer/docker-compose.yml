@@ -1,0 +1,23 @@
+services:
+  code:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    container_name: django-play-code
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:db
+
+  db:
+    container_name: django-play-db
+    restart: unless-stopped
+    image: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+volumes:
+  postgres-data:
