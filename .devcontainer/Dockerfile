@@ -8,6 +8,5 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK on
 ENV PIP_DEFAULT_TIMEOUT 100
 ENV PYTHONUNBUFFERED 1
 
-RUN apt update
-RUN apt install -y zsh curl git
+RUN apt update && apt install -y zsh curl git vim
 RUN chsh -s /bin/zsh

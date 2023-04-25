@@ -2,6 +2,7 @@
 
 if [[ ! -f $ZSH/oh-my-zsh.sh ]]
 then
+    echo "Installing Oh My Zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
