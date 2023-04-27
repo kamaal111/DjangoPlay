@@ -9,3 +9,5 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+alias bat=batcat
