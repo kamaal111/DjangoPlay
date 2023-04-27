@@ -1,6 +1,7 @@
 import logging
-from http.client import BAD_REQUEST
+from http.client import BAD_REQUEST, NOT_FOUND
 from typing import List, Literal, Optional
+from django.http import JsonResponse
 from rest_framework.exceptions import ValidationError, ErrorDetail
 from rest_framework.views import exception_handler
 from rest_framework.response import Response
@@ -17,12 +18,16 @@ def custom_exception_handler(exception: Optional[Exception], context):
 
         match exception:
             case ValidationError():
-                return handle_validation_error(exception=exception, response=response)
+                return _handle_validation_error(exception=exception, response=response)
 
     return response
 
+def handle_not_found(request, exception):
+    data = {"status": 404, "message": "Not Found"}
+    return JsonResponse(data=data, status=NOT_FOUND)
 
-def handle_validation_error(exception: ValidationError, response: Response):
+
+def _handle_validation_error(exception: ValidationError, response: Response):
     details: List[ErrorDetail]
     value_that_is_invalid: str
     for (value_that_is_invalid, details) in exception.detail.items():

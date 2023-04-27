@@ -5,6 +5,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from django_play.accounts import views as accounts_views
 from django_play.blogs import views as blogs_views
+from django_play.exceptions import handle_not_found
 
 
 accounts_router = routers.DefaultRouter()
@@ -13,6 +14,8 @@ accounts_router.register(r"accounts", accounts_views.UserViewSet)
 blogs_router = routers.DefaultRouter()
 blogs_router.register(r"blogs", blogs_views.BlogViewSet)
 
+
+handler404 = handle_not_found
 
 urlpatterns = [
     path("admin/", admin.site.urls),

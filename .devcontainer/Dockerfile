@@ -1,12 +1,4 @@
 FROM python:3.11-slim
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONFAULTHANDLER 1
-ENV PYTHONHASHSEED random
-ENV PIP_NO_CACHE_DIR off
-ENV PIP_DISABLE_PIP_VERSION_CHECK on
-ENV PIP_DEFAULT_TIMEOUT 100
-ENV PYTHONUNBUFFERED 1
-
-RUN apt update && apt install -y zsh curl git vim bat exa
+RUN apt update && apt install -y zsh curl git vim bat exa httpie
 RUN chsh -s /bin/zsh
