@@ -1,3 +1,5 @@
+# 👉 Rebuild this dev container to have these changes reflected
+
 services:
   code:
     build:
