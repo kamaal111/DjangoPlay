@@ -11,7 +11,6 @@
 				"eamodio.gitlens",
 				"skellock.just",
 				"ms-python.python",
-				"ms-python.black-formatter",
 				"redhat.vscode-yaml",
 				"ms-azuretools.vscode-docker",
 				"streetsidesoftware.code-spell-checker"
@@ -20,5 +19,9 @@
 	},
 	"features": {
 		"ghcr.io/guiyomh/features/just:0": {}
-	}
+	},
+	"forwardPorts": [
+		8000,
+		5432
+	]
 }

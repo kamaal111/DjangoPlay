@@ -3,7 +3,8 @@
     "viewsets"
   ],
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
   },
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "none"
 }
