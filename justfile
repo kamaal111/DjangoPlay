@@ -15,7 +15,7 @@ export-requirements:
     poetry export --without-hashes --format=requirements.txt > requirements.txt
 
 run:
-    docker-compose up --build -d
+    docker-compose -f docker/docker-compose.services.yml -f docker/docker-compose.app.yml up --build -d
 
 tear:
     docker-compose down

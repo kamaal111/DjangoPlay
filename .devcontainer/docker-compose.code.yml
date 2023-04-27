@@ -1,0 +1,10 @@
+services:
+  code:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    container_name: django-play-code
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:db
