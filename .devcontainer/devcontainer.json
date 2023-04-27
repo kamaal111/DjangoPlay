@@ -4,7 +4,7 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "code",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"postCreateCommand": "bash .devcontainer/startup.bash",
+	"postCreateCommand": "just setup-dev-env && exit 0",
 	"customizations": {
 		"vscode": {
 			"extensions": [

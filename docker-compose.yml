@@ -2,7 +2,7 @@ services:
   app:
     build: .
     container_name: django-play
-    command: sh start.sh
+    command: just start
     ports:
       - ${PORT}:${PORT}
     environment:

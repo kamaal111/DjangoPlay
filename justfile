@@ -2,10 +2,16 @@ set export
 
 PORT := "8000"
 APPLICATION_NAME := "django-play"
+POSTGRES_PORT := "5432"
+POSTGRES_NAME := "postgres"
+POSTGRES_USER := "postgres"
+POSTGRES_PASSWORD := "pass"
 
-default: export-requirements run
+default: export-requirements start
 
 export-requirements:
+    . .venv/bin/activate
+
     poetry export --without-hashes --format=requirements.txt > requirements.txt
 
 run:
@@ -14,6 +20,8 @@ run:
 tear:
     docker-compose down
 
-run-dev:
-    python manage.py migrate
-    python manage.py runserver $PORT
+start:
+    sh scripts/start.sh
+
+setup-dev-env:
+    zsh scripts/setup-dev-env.zsh
