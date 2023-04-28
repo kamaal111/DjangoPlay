@@ -1,5 +1,5 @@
 #!/bin/sh
 
-. ./.venv/bin/activate
+. .venv/bin/activate
 python manage.py migrate
 python manage.py runserver 0.0.0.0:${PORT=8000}

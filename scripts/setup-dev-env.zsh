@@ -17,17 +17,14 @@ cp -f .devcontainer/.zshrc ~/.zshrc
 . ~/.zshrc
 
 echo "Preinstalling Python packages"
-CURRENT_PATH=$(pwd)
-cd /workspaces/DjangoPlay
-if [ ! -d .venv ]
-then
-    echo "Creating virtual env"
-    python --version
-    python -m venv .venv
-fi
-
 deactivate || echo "Nothing to deactivate"
+cd /workspaces/DjangoPlay
+rm -rf .venv
+echo "Creating virtual env"
+python --version
+python -m venv .venv
 . .venv/bin/activate
+echo "Installing Poetry"
 pip install poetry
+echo "Installing all the packages with Poetry"
 poetry install
-cd $CURRENT_PATH || echo "Couldn't navigate back" && exit 0
