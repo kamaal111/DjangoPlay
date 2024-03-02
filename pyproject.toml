@@ -1,22 +1,31 @@
-[tool.poetry]
-name = "django-play"
+[project]
+name = "djangoplay"
 version = "0.1.0"
-description = ""
-authors = ["Kamaal <kamaal.f1@gmail.com>"]
+description = "Add your description here"
+authors = [
+    { name = "Kamaal Farah", email = "kamaal.f1@gmail.com" }
+]
+dependencies = [
+    "django>=5.0.2",
+    "djangorestframework>=3.14.0",
+    "drf-spectacular>=0.27.1",
+    "psycopg2-binary>=2.9.9",
+]
 readme = "README.md"
-packages = [{include = "django_play"}]
-
-[tool.poetry.dependencies]
-python = "^3.11"
-Django = "^4.1.2"
-djangorestframework = "^3.14.0"
-drf-spectacular = "^0.24.2"
-psycopg2-binary = "^2.9.6"
-
-
-[tool.poetry.group.dev.dependencies]
-black = {version = "^22.8.0", allow-prereleases = true}
+requires-python = ">= 3.8"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "black>=24.2.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/djangoplay"]

@@ -17,14 +17,8 @@ cp -f .devcontainer/.zshrc ~/.zshrc
 . ~/.zshrc
 
 echo "Preinstalling Python packages"
-deactivate || echo "Nothing to deactivate"
-cd /workspaces/DjangoPlay
-rm -rf .venv
 echo "Creating virtual env"
-python --version
-python -m venv .venv
-. .venv/bin/activate
-echo "Installing Poetry"
-pip install poetry
-echo "Installing all the packages with Poetry"
-poetry install
+cp -f .devcontainer/rye-config.toml ~/.rye/config.toml
+curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes"  bash
+source "$HOME/.rye/env"
+rye sync

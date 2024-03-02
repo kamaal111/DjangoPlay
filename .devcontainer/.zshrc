@@ -11,5 +11,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source "$HOME/.rye/env" || true
 
 alias bat=batcat

@@ -17,7 +17,10 @@ tear:
     docker-compose down
 
 start:
-    sh scripts/start.sh
+    #!/bin/zsh
+
+    python manage.py migrate
+    python manage.py runserver 0.0.0.0:${PORT=8000}
 
 setup-dev-env:
     zsh scripts/setup-dev-env.zsh
