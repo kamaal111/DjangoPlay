@@ -1,12 +1,8 @@
 from datetime import datetime
-from typing import TYPE_CHECKING, Optional
 
 from django_play.accounts.services import AuthenticationService
 
 from .serializers import BlogSerializer
-
-if TYPE_CHECKING:
-    from .models import Blog
 
 
 class BlogsService:
@@ -18,8 +14,8 @@ class BlogsService:
         title: str,
         content: str,
         is_draft: bool,
-        date_published: Optional[datetime],
-        date_edited: Optional[datetime],
+        date_published: datetime | None,
+        date_edited: datetime | None,
     ):
         authentication_service = AuthenticationService()
         authenticated_token = authentication_service.authenticated_token(token=token)
@@ -36,7 +32,9 @@ class BlogsService:
         )
         serialized_blog.is_valid(raise_exception=True)
 
-        created_blog: Blog = serialized_blog.create(
-            validated_data={**serialized_blog.data, "user": authenticated_token.user}
+        return serialized_blog.create(
+            validated_data={
+                **dict(serialized_blog.data),
+                "user": authenticated_token.user,
+            }
         )
-        return created_blog

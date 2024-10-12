@@ -33,7 +33,7 @@ class UserViewSet(
     def login(self, request: Request):
         payload_serializer = LoginPayloadSerializer(data=request.data)
         payload_serializer.is_valid(raise_exception=True)
-        validated_data = payload_serializer.data
+        validated_data = dict(payload_serializer.data)
 
         authentication_service = AuthenticationService()
         token = authentication_service.get_user_token(

@@ -19,17 +19,18 @@ class UserSerializer(serializers.ModelSerializer):
     def to_representation(self, instance: User):
         representation = super().to_representation(instance)
         representation.pop("password")
+
         return representation
 
     def create(self, validated_data: OrderedDict):
-        updated_data = validated_data
+        updated_data = validated_data.copy()
 
         try:
             User.objects.get(username=updated_data["username"])
         except User.DoesNotExist:
             pass
         else:
-            raise UserAlreadyExists
+            raise UserAlreadyExists()
 
         raw_password: str = updated_data.pop("password")
         updated_data["password"] = make_password(raw_password)

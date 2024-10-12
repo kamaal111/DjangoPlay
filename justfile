@@ -7,7 +7,7 @@ POSTGRES_NAME := "django_play_db"
 POSTGRES_USER := "django-play-user"
 POSTGRES_PASSWORD := "secure-password"
 
-default: start
+default: run-dev
 
 run:
     just export-requirements
@@ -16,7 +16,7 @@ run:
 tear:
     docker-compose down
 
-start: install-modules run-db-migrations
+run-dev: install-modules run-db-migrations
     #!/bin/zsh
 
     . .venv/bin/activate
