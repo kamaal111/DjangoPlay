@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import User
 from django.http import Http404
 from rest_framework.authtoken.models import Token
 
@@ -7,8 +7,7 @@ from .exceptions import Unauthorized
 
 
 class AuthenticationService:
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
     def authenticated_token(self, token: str):
         try:

@@ -16,14 +16,57 @@ run:
 tear:
     docker-compose down
 
-start:
+start: install-modules run-db-migrations
     #!/bin/zsh
 
-    python manage.py migrate
-    python manage.py runserver 0.0.0.0:${PORT=8000}
+    . .venv/bin/activate
+    python manage.py runserver 0.0.0.0:$PORT
 
-setup-dev-env:
-    zsh scripts/setup-dev-env.zsh
+run-db-migrations:
+    #!/bin/zsh
+
+    . .venv/bin/activate
+    python manage.py migrate
+
+lint:
+    #!/bin/zsh
+
+    . .venv/bin/activate
+    ruff check .
+
+lint-fix:
+    #!/bin/zsh
+
+    . .venv/bin/activate
+    ruff check . --fix
+
+format:
+    #!/bin/zsh
+
+    . .venv/bin/activate
+    ruff format .
+
+post-dev-container-create:
+    just .devcontainer/post-create
+    just bootstrap
+
+# Bootstrap project
+bootstrap: install-modules setup-pre-commit
+
+[private]
+install-modules:
+    #!/bin/zsh
+
+    . "$HOME/.rye/env"
+
+    rye sync
+
+[private]
+setup-pre-commit:
+    #!/bin/zsh
+
+    . .venv/bin/activate
+    pre-commit install
 
 [private]
 export-requirements:

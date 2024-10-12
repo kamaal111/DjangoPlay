@@ -1,8 +1,7 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import mixins, viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
-from drf_spectacular.utils import extend_schema
-
 
 from .models import Blog
 from .serializers import BlogSerializer, CreatePayloadSerializer

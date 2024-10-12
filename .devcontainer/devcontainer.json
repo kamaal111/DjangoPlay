@@ -7,7 +7,7 @@
 	],
 	"service": "code",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"postCreateCommand": "just setup-dev-env && exit 0",
+	"postCreateCommand": "just post-dev-container-create",
 	"customizations": {
 		"vscode": {
 			"settings": {
@@ -20,7 +20,9 @@
 				"redhat.vscode-yaml",
 				"ms-azuretools.vscode-docker",
 				"streetsidesoftware.code-spell-checker",
-				"tamasfe.even-better-toml"
+				"tamasfe.even-better-toml",
+				"aaron-bond.better-comments",
+				"charliermarsh.ruff"
 			]
 		}
 	},

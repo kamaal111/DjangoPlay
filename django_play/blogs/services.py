@@ -10,8 +10,7 @@ if TYPE_CHECKING:
 
 
 class BlogsService:
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
     def create(
         self,

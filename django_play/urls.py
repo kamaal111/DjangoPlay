@@ -1,12 +1,11 @@
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework import routers
 
 from django_play.accounts import views as accounts_views
 from django_play.blogs import views as blogs_views
 from django_play.exceptions import handle_not_found
-
 
 accounts_router = routers.DefaultRouter()
 accounts_router.register(r"accounts", accounts_views.UserViewSet)

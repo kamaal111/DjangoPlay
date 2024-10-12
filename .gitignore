@@ -4,3 +4,4 @@ __pycache__
 venv
 data
 requirements.txt
+.ruff_cache
