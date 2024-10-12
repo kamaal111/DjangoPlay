@@ -12,6 +12,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pass
     volumes:
-      - .:/code
+      - .:/app
     depends_on:
       - db

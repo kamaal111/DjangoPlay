@@ -14,11 +14,18 @@ fi
 
 echo "Updating zsh configuration"
 cp -f .devcontainer/.zshrc ~/.zshrc
+
 . ~/.zshrc
 
-echo "Preinstalling Python packages"
-echo "Creating virtual env"
-cp -f .devcontainer/rye-config.toml ~/.rye/config.toml
-curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes"  bash
-source "$HOME/.rye/env"
+cp -f rye-config.toml ~/.rye/config.toml
+curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes"  bash
+
+. "$HOME/.rye/env"
+
+mkdir -p ~/.zfunc
+rye self completion -s zsh > ~/.zfunc/_rye
+
+mkdir -p $ZSH_CUSTOM/plugins/rye
+rye self completion -s zsh > $ZSH_CUSTOM/plugins/rye/_rye
+
 rye sync

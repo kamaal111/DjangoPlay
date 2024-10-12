@@ -3,9 +3,9 @@ set export
 PORT := "8000"
 APPLICATION_NAME := "django-play"
 POSTGRES_PORT := "5432"
-POSTGRES_NAME := "postgres"
-POSTGRES_USER := "postgres"
-POSTGRES_PASSWORD := "pass"
+POSTGRES_NAME := "django_play_db"
+POSTGRES_USER := "django-play-user"
+POSTGRES_PASSWORD := "secure-password"
 
 default: start
 

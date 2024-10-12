@@ -2,13 +2,11 @@
 name = "djangoplay"
 version = "0.1.0"
 description = "Add your description here"
-authors = [
-    { name = "Kamaal Farah", email = "kamaal.f1@gmail.com" }
-]
+authors = [{ name = "Kamaal Farah", email = "kamaal.f1@gmail.com" }]
 dependencies = [
-    "django>=5.0.2",
-    "djangorestframework>=3.14.0",
-    "drf-spectacular>=0.27.1",
+    "django>=5.1.2",
+    "djangorestframework>=3.15.2",
+    "drf-spectacular>=0.27.2",
     "psycopg2-binary>=2.9.9",
 ]
 readme = "README.md"
@@ -20,9 +18,7 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = [
-    "black>=24.2.0",
-]
+dev-dependencies = []
 
 [tool.hatch.metadata]
 allow-direct-references = true

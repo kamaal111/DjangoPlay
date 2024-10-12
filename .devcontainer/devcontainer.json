@@ -19,7 +19,8 @@
 				"ms-python.python",
 				"redhat.vscode-yaml",
 				"ms-azuretools.vscode-docker",
-				"streetsidesoftware.code-spell-checker"
+				"streetsidesoftware.code-spell-checker",
+				"tamasfe.even-better-toml"
 			]
 		}
 	},
@@ -27,8 +28,5 @@
 		"ghcr.io/guiyomh/features/just:0": {},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
-	"forwardPorts": [
-		8000,
-		5432
-	]
+	"forwardPorts": []
 }

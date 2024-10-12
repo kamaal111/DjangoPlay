@@ -10,7 +10,7 @@ plugins=(
     zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
-source "$HOME/.rye/env" || true
+. $ZSH/oh-my-zsh.sh
+. "$HOME/.rye/env" || true
 
 alias bat=batcat

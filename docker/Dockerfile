@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim-bookworm
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
@@ -8,9 +8,9 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK on
 ENV PIP_DEFAULT_TIMEOUT 100
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /code
+WORKDIR /app
 
-COPY django_play templates manage.py requirements.txt start.sh /code/
+COPY django_play templates manage.py requirements.txt start.sh /app/
 
 RUN python -m venv .venv
 RUN . .venv/bin/activate
