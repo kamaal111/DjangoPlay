@@ -8,6 +8,9 @@ dependencies = [
     "djangorestframework>=3.15.2",
     "drf-spectacular>=0.27.2",
     "psycopg2-binary>=2.9.9",
+    "polars>=1.9.0",
+    "pydantic>=2.9.2",
+    "djangorestframework-simplejwt[crypto]>=5.3.1",
 ]
 requires-python = ">= 3.8"
 

@@ -1,17 +1,16 @@
-from drf_spectacular.utils import extend_schema
 from rest_framework import mixins, viewsets
-from rest_framework.request import Request
-from rest_framework.response import Response
+from rest_framework.decorators import permission_classes as permission_classes_decorator
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Blog
-from .serializers import BlogSerializer, CreatePayloadSerializer
-from .services import BlogsService
+from .serializers import BlogSerializer
 
 
 class BlogViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
+    mixins.CreateModelMixin,
     viewsets.GenericViewSet,
 ):
     """
@@ -20,16 +19,8 @@ class BlogViewSet(
 
     queryset = Blog.objects.all().order_by("id")
     serializer_class = BlogSerializer
+    permission_classes = []
 
-    @extend_schema(request=CreatePayloadSerializer)
-    def create(self, request: Request, *args, **kwargs):
-        payload_serializer = CreatePayloadSerializer(data=request.data)
-        payload_serializer.is_valid(raise_exception=True)
-
-        blogs_service = BlogsService()
-        blog = blogs_service.create(
-            **payload_serializer.data,
-        )
-
-        serialized_blog: BlogSerializer = self.get_serializer(blog)
-        return Response(serialized_blog.data, status=200)
+    @permission_classes_decorator([IsAuthenticated])
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)

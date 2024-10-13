@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["username", "email", "password"]
+        fields = "__all__"
 
     def to_representation(self, instance: User):
         representation = super().to_representation(instance)
@@ -35,18 +35,3 @@ class UserSerializer(serializers.ModelSerializer):
         raw_password: str = updated_data.pop("password")
         updated_data["password"] = make_password(raw_password)
         return super().create(updated_data)
-
-
-class LoginPayloadSerializer(serializers.Serializer):
-    username = serializers.CharField(required=True)
-    password = serializers.CharField(required=True)
-
-    class Meta:
-        fields = ["username", "password"]
-
-
-class LoginResponseSerializer(serializers.Serializer):
-    token = serializers.CharField(required=True)
-
-    class Meta:
-        fields = ["token"]

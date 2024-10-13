@@ -1,12 +1,6 @@
-from http.client import CONFLICT, UNAUTHORIZED
+from http.client import CONFLICT
 
 from rest_framework.exceptions import APIException
-
-
-class Unauthorized(APIException):
-    status_code = UNAUTHORIZED
-    default_detail = "Unauthorized."
-    default_code = "unauthorized"
 
 
 class UserAlreadyExists(APIException):

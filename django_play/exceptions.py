@@ -14,7 +14,7 @@ def custom_exception_handler(exception: Optional[Exception], context):
     response = exception_handler(exception, context)
 
     # Now add the HTTP status code to the response.
-    if response is not None:
+    if response is not None and response.data is not None:
         response.data["status_code"] = response.status_code
 
         match exception:
