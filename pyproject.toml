@@ -9,7 +9,6 @@ dependencies = [
     "drf-spectacular>=0.27.2",
     "psycopg2-binary>=2.9.9",
 ]
-readme = "README.md"
 requires-python = ">= 3.8"
 
 [build-system]
@@ -18,10 +17,7 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = [
-    "pre-commit>=4.0.1",
-    "ruff>=0.6.9",
-]
+dev-dependencies = ["pre-commit>=4.0.1", "ruff>=0.6.9"]
 
 [tool.hatch.metadata]
 allow-direct-references = true

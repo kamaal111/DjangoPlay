@@ -6,15 +6,23 @@ POSTGRES_PORT := "5432"
 POSTGRES_NAME := "django_play_db"
 POSTGRES_USER := "django-play-user"
 POSTGRES_PASSWORD := "secure-password"
+COMPOSE_FILES := "-f docker-compose.yml -f docker/docker-compose.services.yml"
 
 default: run-dev
 
 run:
-    just export-requirements
-    docker-compose -f docker/docker-compose.services.yml -f docker/docker-compose.app.yml up --build -d
+    docker compose $COMPOSE_FILES up --build -d
+
+build:
+    docker build -t django-play .
 
 tear:
-    docker-compose down
+    docker compose $COMPOSE_FILES down
+
+start:
+    #!/bin/zsh
+
+    python manage.py runserver 0.0.0.0:$PORT
 
 run-dev: install-modules run-db-migrations
     #!/bin/zsh
@@ -67,8 +75,3 @@ setup-pre-commit:
 
     . .venv/bin/activate
     pre-commit install
-
-[private]
-export-requirements:
-    . .venv/bin/activate
-    poetry export --without-hashes --format=requirements.txt > requirements.txt

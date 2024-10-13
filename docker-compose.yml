@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django-play
+    ports:
+      - 8000:8000
+    environment:
+      POSTGRES_PORT: 5432
+      POSTGRES_NAME: django_play_db
+      POSTGRES_USER: django-play-user
+      POSTGRES_PASSWORD: secure-password
+    volumes:
+      - .:/app
+    depends_on:
+      - db
