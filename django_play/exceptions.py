@@ -1,14 +1,13 @@
 import logging
 from http.client import BAD_REQUEST, NOT_FOUND
-from typing import List, Literal, Optional
 
 from django.http import JsonResponse
-from rest_framework.exceptions import ErrorDetail, ValidationError
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
 
 
-def custom_exception_handler(exception: Optional[Exception], context):
+def custom_exception_handler(exception: Exception | None, context):
     # Call REST framework's default exception handler first,
     # to get the standard error response.
     response = exception_handler(exception, context)
@@ -19,7 +18,7 @@ def custom_exception_handler(exception: Optional[Exception], context):
 
         match exception:
             case ValidationError():
-                return _handle_validation_error(exception=exception, response=response)
+                return __handle_validation_error(exception=exception, response=response)
 
     return response
 
@@ -29,15 +28,10 @@ def handle_not_found(request, exception):
     return JsonResponse(data=data, status=NOT_FOUND)
 
 
-def _handle_validation_error(exception: ValidationError, response: Response):
-    details: List[ErrorDetail]
-    value_that_is_invalid: str
+def __handle_validation_error(exception: ValidationError, response: Response):
+    assert isinstance(exception.detail, dict)
     for value_that_is_invalid, details in exception.detail.items():
         for detail in details:
-            code: Literal[
-                "required", "blank", "min_length", "max_length", "invalid"
-            ] = detail.code
-
             messages = {
                 "required": f"{value_that_is_invalid} is required",
                 "blank": f"{value_that_is_invalid} is not allowed to be empty",
@@ -46,9 +40,9 @@ def _handle_validation_error(exception: ValidationError, response: Response):
                 "invalid": f"{value_that_is_invalid} is invalid",
             }
 
-            message = messages.get(code)
+            message = messages.get(detail.code)
             if message is None:
-                logging.info(f"unknown validation code; {code}")
+                logging.info(f"unknown validation code; {detail.code}")
                 message = f"{value_that_is_invalid} is invalid"
 
             response.data = {"detail": message, "status_code": BAD_REQUEST}
