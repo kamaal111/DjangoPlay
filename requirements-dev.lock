@@ -51,10 +51,14 @@ jsonschema==4.23.0
     # via drf-spectacular
 jsonschema-specifications==2024.10.1
     # via jsonschema
+markupsafe==3.0.1
+    # via werkzeug
 nodeenv==1.9.1
     # via pre-commit
 platformdirs==4.3.6
     # via virtualenv
+polars==1.9.0
+    # via djangoplay
 pre-commit==4.0.1
 psycopg2-binary==2.9.9
     # via djangoplay
@@ -85,3 +89,4 @@ uritemplate==4.1.1
     # via drf-spectacular
 virtualenv==20.26.6
     # via pre-commit
+werkzeug==3.0.4

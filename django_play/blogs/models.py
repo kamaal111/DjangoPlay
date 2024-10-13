@@ -1,13 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from django_play.managers import PolarsManager
 
-class BlogQuerySet(models.QuerySet): ...
 
-
-class BlogManager(models.Manager):
-    def get_queryset(self) -> models.QuerySet:
-        return BlogQuerySet(self.model, using=self._db)
+class BlogManager(PolarsManager): ...
 
 
 class Blog(models.Model):

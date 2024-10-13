@@ -28,7 +28,13 @@ run-dev: install-modules run-db-migrations
     #!/bin/zsh
 
     . .venv/bin/activate
-    python manage.py runserver 0.0.0.0:$PORT
+    python manage.py runserver_plus 0.0.0.0:$PORT
+
+shell:
+    #!/bin/zsh
+
+    . .venv/bin/activate
+    python manage.py shell_plus
 
 run-db-migrations:
     #!/bin/zsh

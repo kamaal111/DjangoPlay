@@ -43,6 +43,8 @@ jsonschema==4.23.0
     # via drf-spectacular
 jsonschema-specifications==2024.10.1
     # via jsonschema
+polars==1.9.0
+    # via djangoplay
 psycopg2-binary==2.9.9
     # via djangoplay
 pycparser==2.22
