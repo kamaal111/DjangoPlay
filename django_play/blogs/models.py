@@ -15,7 +15,7 @@ class Blog(models.Model):
     date_published = models.DateTimeField(default=None, null=True)
     date_edited = models.DateTimeField(default=None, null=True)
 
-    objects = BlogManager()
+    objects: BlogManager = BlogManager()
 
     def __str__(self) -> str:
         return f"({self.pk}) {self.title}"
