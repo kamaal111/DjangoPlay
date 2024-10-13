@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import polars as pl
 from django.db import connection, models
 
@@ -7,10 +9,12 @@ class PolarsQuerySet(models.QuerySet):
         statement, params = self.query.sql_with_params()
         corrected_params = []
         for param in params:
-            if not isinstance(param, str):
-                corrected_params.append(param)
-            else:
+            if isinstance(param, str):
                 corrected_params.append(f"'{param}'")
+            elif isinstance(param, datetime):
+                corrected_params.append(f"'{param.isoformat()}'")
+            else:
+                corrected_params.append(param)
 
         return pl.read_database(
             query=(statement % tuple(corrected_params)).__str__(), connection=connection
