@@ -22,10 +22,13 @@ cffi==1.17.1
 cryptography==43.0.1
     # via djangorestframework-simplejwt
 django==5.1.2
+    # via django-extensions
     # via djangoplay
     # via djangorestframework
     # via djangorestframework-simplejwt
     # via drf-spectacular
+django-extensions==3.2.3
+    # via djangoplay
 djangorestframework==3.15.2
     # via djangoplay
     # via djangorestframework-simplejwt
@@ -40,8 +43,6 @@ jsonschema==4.23.0
     # via drf-spectacular
 jsonschema-specifications==2024.10.1
     # via jsonschema
-polars==1.9.0
-    # via djangoplay
 psycopg2-binary==2.9.9
     # via djangoplay
 pycparser==2.22

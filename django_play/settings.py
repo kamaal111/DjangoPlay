@@ -45,7 +45,8 @@ REST_FRAMEWORK = {
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
+    "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -57,7 +58,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "django_play.accounts",
     "django_play.blogs",
-]
+)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -96,11 +97,11 @@ WSGI_APPLICATION = "django_play.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("POSTGRES_NAME"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "NAME": os.environ.get("POSTGRES_NAME", "django_play_db"),
+        "USER": os.environ.get("POSTGRES_USER", "django-play-user"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "secure-password"),
         "HOST": "db",
-        "PORT": os.environ.get("POSTGRES_PORT"),
+        "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
 }
 

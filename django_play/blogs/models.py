@@ -2,7 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class BlogManager(models.Manager): ...
+class BlogQuerySet(models.QuerySet): ...
+
+
+class BlogManager(models.Manager):
+    def get_queryset(self) -> models.QuerySet:
+        return BlogQuerySet(self.model, using=self._db)
 
 
 class Blog(models.Model):
