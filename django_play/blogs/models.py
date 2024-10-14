@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from django.contrib.auth.models import User
 from django.db import models
-
-from django_play.managers import PolarsManager
+from django_dataframe.managers import PolarsManager
 
 
 class Blog(models.Model):

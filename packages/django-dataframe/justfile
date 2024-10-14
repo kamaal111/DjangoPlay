@@ -1,0 +1,5 @@
+build:
+    rye build
+
+clean-build:
+    rye build --clean

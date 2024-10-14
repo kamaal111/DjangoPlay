@@ -303,6 +303,7 @@ uritemplate==4.1.1
     # via drf-spectacular
 urllib3==2.2.3
     # via requests
+uv==0.4.20
 virtualenv==20.26.6
     # via pre-commit
 wcwidth==0.2.13

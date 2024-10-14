@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Generic, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, Generic, TypeVar
 
 import narwhals as nw
 import polars as pl
 from django.db import connection, models
 
 if TYPE_CHECKING:
-    from django_play.typing import PolarsValuesQuerySet
+    from django.db.models.query import ValuesQuerySet
 
 PolarsModel = TypeVar("PolarsModel", bound=models.Model)
 
@@ -65,4 +65,24 @@ class PolarsManager(models.Manager.from_queryset(PolarsQuerySet), Generic[Polars
     def values(
         self, *fields: str | models.Combinable, **expressions: Any
     ) -> PolarsValuesQuerySet[PolarsModel]:
+        # Just for the sake of typing it well!
         return super().values(*fields, **expressions)  # type: ignore
+
+
+# This class is there just to extend the types on `ValuesQuerySet` so should
+# ony be used to assist with type hinting.
+if TYPE_CHECKING:
+    PolarsValuesQuerySetsModel = TypeVar(
+        "PolarsValuesQuerySetsModel", bound=models.Model
+    )
+
+    class PolarsValuesQuerySet(
+        ValuesQuerySet[PolarsValuesQuerySetsModel, Dict[str, Any]]
+    ):
+        def to_polars(self) -> pl.LazyFrame: ...
+
+        def to_eager_polars(self) -> pl.DataFrame: ...
+
+        def to_narwhals_from_polars(self) -> nw.LazyFrame[pl.LazyFrame]: ...
+
+        def to_narwhals_from_eager_polars(self) -> nw.DataFrame[pl.DataFrame]: ...

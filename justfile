@@ -67,13 +67,26 @@ post-dev-container-create:
 # Bootstrap project
 bootstrap: install-modules setup-pre-commit
 
-[private]
 install-modules:
     #!/bin/zsh
 
     . "$HOME/.rye/env"
 
     rye sync
+    just install-local-modules
+
+[private]
+install-local-modules:
+    #!/bin/zsh
+
+    . .venv/bin/activate
+    cd packages
+    for package in *
+    do
+        cd $package
+        uv pip install -e .
+        cd ..
+    done
 
 [private]
 setup-pre-commit:
