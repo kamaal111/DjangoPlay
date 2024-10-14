@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, TypeVar
 
+import narwhals as nw
 import polars as pl
 from django.db import models
 
@@ -13,3 +14,5 @@ PolarsModel = TypeVar("PolarsModel", bound=models.Model)
 
 class PolarsValuesQuerySet(ValuesQuerySet[PolarsModel, dict[str, Any]]):
     def to_polars(self) -> pl.DataFrame: ...
+
+    def to_narwhals_from_polars(self) -> nw.DataFrame[pl.DataFrame]: ...
