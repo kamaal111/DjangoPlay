@@ -13,6 +13,8 @@ dependencies = [
     "django-extensions>=3.2.3",
     "polars>=1.9.0",
     "ipykernel>=6.29.5",
+    "jupyterlab>=4.2.5",
+    "narwhals>=1.9.3",
 ]
 requires-python = ">= 3.12"
 
