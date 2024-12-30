@@ -1,7 +1,6 @@
+from django_play_migrations.blogs.model import Blog
 from rest_framework import serializers
 from rest_framework.request import Request
-
-from .models import Blog
 
 
 class BlogSerializer(serializers.ModelSerializer):

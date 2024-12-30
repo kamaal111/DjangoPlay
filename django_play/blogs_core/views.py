@@ -1,8 +1,8 @@
+from django_play_migrations.blogs.model import Blog
 from rest_framework import mixins, viewsets
 from rest_framework.decorators import permission_classes as permission_classes_decorator
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Blog
 from .serializers import BlogSerializer
 
 

@@ -43,6 +43,8 @@ REST_FRAMEWORK = {
 }
 
 
+# MIGRATION_MODULES = {"blogs_core/migrations": "django_play_migrations.blogs"}
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -57,7 +59,8 @@ INSTALLED_APPS = (
     "drf_spectacular",
     "rest_framework_simplejwt",
     "django_play.accounts",
-    "django_play.blogs",
+    "django_play.blogs_core.apps.BlogsCoreConfig",
+    "django_play_migrations.blogs.apps.BlogsConfig",
 )
 
 MIDDLEWARE = [

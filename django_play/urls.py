@@ -9,7 +9,7 @@ from rest_framework_simplejwt.views import (
 )
 
 from django_play.accounts import views as accounts_views
-from django_play.blogs import views as blogs_views
+from django_play.blogs_core import views as blogs_views
 from django_play.exceptions import handle_not_found
 
 accounts_router = routers.DefaultRouter()
